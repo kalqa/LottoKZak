@@ -4,7 +4,8 @@ public class NumberReceiverConfiguration {
 
     NumberReceiverFacade buildModuleForClients() {
         NumberValidator numberValidator = new NumberValidator();
-        return new NumberReceiverFacade(numberValidator);
+        NumberReceiverDateBase numberReceiverDateBase = new NumberReceiverDateBase();
+        return new NumberReceiverFacade(numberValidator, numberReceiverDateBase);
     }
 
     NumberReceiverFacade buildModuleForTests() {

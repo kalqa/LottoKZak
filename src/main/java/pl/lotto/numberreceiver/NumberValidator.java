@@ -10,7 +10,7 @@ class NumberValidator {
     private static final int MAX_NUMBER_VALUE = 49;
 
 
-    boolean areExactlySixNumbers(Set<Integer> targetNumbersFromUser) {
+    boolean areExactlySixNumbers(List<Integer> targetNumbersFromUser) {
         return targetNumbersFromUser.size() != USER_NUMBER;
     }
 

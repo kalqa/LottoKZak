@@ -1,13 +1,10 @@
 package pl.lotto.numberreceiver;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class NumberReceiverFacade {
 
@@ -16,25 +13,40 @@ public class NumberReceiverFacade {
     private static final String ERROR_LIMIT_VALUE_NUMBER = "Number not in limits";
 
     private final NumberValidator numberValidator;
+    private final NumberReceiverDateBase numberReceiverDateBase;
 
-    public NumberReceiverFacade(NumberValidator numberValidator) {
+    public NumberReceiverFacade(NumberValidator numberValidator, NumberReceiverDateBase numberReceiverDateBase)
+    {
         this.numberValidator = numberValidator;
+        this.numberReceiverDateBase = numberReceiverDateBase;
     }
 
     public NumberReceiverResultDto inputNumbers(List<Integer> numbersFromUser) {
-        Set<Integer> targetNumbersFromUser = new HashSet<>(numbersFromUser);
-        if (numberValidator.areExactlySixNumbers(targetNumbersFromUser)) {
-            return new NumberReceiverResultDto(Optional.of(UUID.randomUUID()), ERROR_QUANTITY_NUMBER);
+        List<Integer> sortedListNumber = numbersFromUser.stream().distinct().sorted().collect(Collectors.toList());
+        Optional<UUID> uuid = Optional.of(UUID.randomUUID());
+        if (numberValidator.areExactlySixNumbers(sortedListNumber)) {
+            return new NumberReceiverResultDto(uuid, ERROR_QUANTITY_NUMBER);
         }
-        List<Integer> sortedListNumber = new ArrayList<>(targetNumbersFromUser);
-        Collections.sort(sortedListNumber);
         if (numberValidator.isInRange(sortedListNumber)) {
-            return new NumberReceiverResultDto(Optional.of(UUID.randomUUID()), ERROR_LIMIT_VALUE_NUMBER);
+            return new NumberReceiverResultDto(uuid, ERROR_LIMIT_VALUE_NUMBER);
         }
-        return new NumberReceiverResultDto(Optional.of(UUID.randomUUID()), OK_MESSAGE);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        int valueDay = localDateTime.getDayOfWeek().getValue();
+        if(valueDay<6)
+        {
+            localDateTime = localDateTime.plusDays(6-valueDay);
+        }
+        else if(valueDay==6 && localDateTime.getHour()>20) {
+            localDateTime = localDateTime.plusDays(7);
+        }
+        else if(valueDay>6) {
+            localDateTime = localDateTime.plusDays(6).withHour(1);
+        }
+        numberReceiverDateBase.addToCouponLocalDateTimeListMap(localDateTime,new NumberUserCoupon(uuid,sortedListNumber));
+        return new NumberReceiverResultDto(uuid, OK_MESSAGE);
     }
 
-    public void retreiveUserNumbersForDate(LocalDateTime date){
-
+    public void retrieveUserNumbersForDate(LocalDateTime date){
+        numberReceiverDateBase.getListNumberUserCoupons(date);
     }
 }
