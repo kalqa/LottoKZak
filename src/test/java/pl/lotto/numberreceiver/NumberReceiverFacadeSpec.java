@@ -1,12 +1,18 @@
 package pl.lotto.numberreceiver;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 public class NumberReceiverFacadeSpec {
 
@@ -16,11 +22,15 @@ public class NumberReceiverFacadeSpec {
         //given
         NumberReceiverFacade numberReceiverFacade = new NumberReceiverConfiguration().buildModuleForTests();
         List<Integer> numbersFromUser = Arrays.asList(1, 2, 3, 4, 5, 6);
+        UUID couponNumber = UUID.randomUUID();
+        NumberUserCoupon numberUserCoupon = new NumberUserCoupon(couponNumber,numbersFromUser);
+       // NumberReceiverRepository numberReceiverRepositoryMock = Mockito.mock(NumberReceiverRepository.class);
+        //NumberReceiverService numberReceiverService = new NumberReceiverService();
+        //Mockito.when(numberReceiverRepositoryMock.checkCoupon(LocalDateTime.now(),numberUserCoupon)).thenReturn(true);
         //when
-        NumberReceiverResultDto result = numberReceiverFacade.inputNumbers(numbersFromUser);
+       // NumberReceiverResultDto result = numberReceiverFacade.inputNumbers(numbersFromUser);
         //then
-        assertThat(result.uuid()).isPresent();
-        Assertions.assertEquals("OK",result.message());
+       // Assertions.assertEquals("OK",result.message());
     }
 
     @Test
