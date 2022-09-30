@@ -1,13 +1,12 @@
 package pl.lotto.numberreceiver;
-import java.time.LocalDateTime;
 import java.util.*;
 
 interface NumberReceiverRepository {
 
-    void saveCoupon(LocalDateTime drawDate, NumberUserCoupon userCoupon);
+    NumberUserCoupon saveCoupon(NumberUserCoupon numberUserCoupon);
 
-    boolean checkCoupon(LocalDateTime drawDate, NumberUserCoupon userCoupon);
+    boolean checkCoupon(UUID uuid);
 
-    List<NumberUserCoupon> getCouponsFromDate(LocalDateTime drawDate);
+    List<NumberUserCoupon> getCouponsFromDate(NumberDrawDate numberDrawDate);
 
 }

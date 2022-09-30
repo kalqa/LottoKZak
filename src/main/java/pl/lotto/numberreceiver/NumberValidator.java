@@ -1,7 +1,6 @@
 package pl.lotto.numberreceiver;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -22,14 +21,15 @@ class NumberValidator {
                 || sortedListNumber.get(sortedListNumber.size() - 1) > MAX_NUMBER_VALUE;
     }
 
-    LocalDateTime getDateOfDraw() {
-        int dayNumber = DayOfWeek.SATURDAY.getValue()-LocalDate.now().getDayOfWeek().getValue();
+    LocalDateTime getDateOfDraw(LocalDateTime couponDate) {
+        int dayNumber = DayOfWeek.SATURDAY.getValue()-couponDate.getDayOfWeek().getValue();
 
-        if (LocalDateTime.now().getDayOfWeek().getValue() > DayOfWeek.SUNDAY.getValue() &&
-                LocalDateTime.now().toLocalTime().isAfter(TIME_OF_DRAW)) {
-            dayNumber = DayOfWeek.SATURDAY.getValue()+(DayOfWeek.SUNDAY.getValue()-LocalDate.now().getDayOfWeek().getValue());
+        if (couponDate.getDayOfWeek().getValue() > DayOfWeek.SUNDAY.getValue() &&
+                couponDate.toLocalTime().isAfter(TIME_OF_DRAW)) {
+            dayNumber = DayOfWeek.SATURDAY.getValue()
+                    +(DayOfWeek.SUNDAY.getValue()-couponDate.getDayOfWeek().getValue());
         }
-        return LocalDateTime.of(LocalDate.now().plusDays(dayNumber),TIME_OF_DRAW);
+        return LocalDateTime.of(couponDate.toLocalDate().plusDays(dayNumber),TIME_OF_DRAW);
     }
 
 }
