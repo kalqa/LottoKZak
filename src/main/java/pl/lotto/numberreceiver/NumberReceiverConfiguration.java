@@ -1,15 +1,24 @@
 package pl.lotto.numberreceiver;
 
-public class NumberReceiverConfiguration {
+class NumberReceiverConfiguration {
+
+    private NumberReceiverRepository numberReceiverRepository;
+
+    NumberReceiverConfiguration(NumberReceiverRepository numberReceiverRepository) {
+        this.numberReceiverRepository = numberReceiverRepository;
+    }
+
+    NumberReceiverConfiguration() {
+    }
 
     NumberReceiverFacade buildModuleForClients() {
         NumberValidator numberValidator = new NumberValidator();
-        NumberReceiverDateBase numberReceiverDateBase = new NumberReceiverDateBase();
-        return new NumberReceiverFacade(numberValidator, numberReceiverDateBase);
+        return new NumberReceiverFacade(numberValidator, numberReceiverRepository);
     }
 
     NumberReceiverFacade buildModuleForTests() {
         return buildModuleForClients();
     }
+
 
 }
