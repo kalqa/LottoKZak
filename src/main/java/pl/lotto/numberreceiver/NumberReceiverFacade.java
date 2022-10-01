@@ -38,7 +38,7 @@ public class NumberReceiverFacade {
             return new NumberReceiverResultDto(couponNumber,ERROR_SAVE_COUPON);
     }
 
-    public void retrieveUserNumbers(LocalDateTime drawDate) {
-        numberReceiverRepository.getCouponsFromDate(new NumberDrawDate(drawDate));
+    public List<NumberUserCoupon> retrieveUserNumbers(LocalDateTime drawDate) {
+        return numberReceiverRepository.getCouponsFromDate(drawDate);
     }
 }

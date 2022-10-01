@@ -1,5 +1,6 @@
 package pl.lotto.numberreceiver;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -91,17 +92,21 @@ public class NumberReceiverFacadeSpec {
     }
 
     @Test
-    @DisplayName("should return unique Id for user when given numbers were correct")
-    public void should_return_unique_id_when_numbers_were_correct() {
+    @DisplayName("should return list users coupon when given draw date correct")
+    public void should_return_list_users_coupon_when_given_draw_date_correct() {
         //given
         NumberReceiverFacade numberReceiverFacade =
                 new NumberReceiverConfiguration(new NumberReceiverRepositoryStub()).buildModuleForTests();
-        List<Integer> numbersFromUser = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> numbersFromUserExpected = Arrays.asList(1, 2, 3, 4, 5, 6);
         UUID couponNumberExpected = new UUID(111L,222L);
+        LocalDateTime drawDateExpected = LocalDateTime.of(
+                2022,10,1,20,0,0,0);
         //when
-        NumberReceiverResultDto result = numberReceiverFacade.inputNumbers(numbersFromUser);
+        List<NumberUserCoupon> result = numberReceiverFacade.retrieveUserNumbers(drawDateExpected);
         //then
-        Assertions.assertEquals("OK",result.message());
-        Assertions.assertEquals(couponNumberExpected,result.uuid());
+        Assertions.assertEquals(1,result.size());
+        Assertions.assertEquals(couponNumberExpected,result.get(0).getUuid());
+        Assertions.assertEquals(numbersFromUserExpected.size(),result.get(0).getCouponNumbers().size());
+        Assertions.assertEquals(drawDateExpected,result.get(0).getDrawDate());
     }
 }

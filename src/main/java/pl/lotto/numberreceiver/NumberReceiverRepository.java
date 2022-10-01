@@ -1,4 +1,5 @@
 package pl.lotto.numberreceiver;
+import java.time.LocalDateTime;
 import java.util.*;
 
 interface NumberReceiverRepository {
@@ -7,6 +8,6 @@ interface NumberReceiverRepository {
 
     boolean checkCoupon(UUID uuid);
 
-    List<NumberUserCoupon> getCouponsFromDate(NumberDrawDate numberDrawDate);
+    List<NumberUserCoupon> getCouponsFromDate(LocalDateTime drawDate);
 
 }

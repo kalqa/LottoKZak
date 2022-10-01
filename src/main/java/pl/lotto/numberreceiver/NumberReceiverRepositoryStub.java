@@ -1,20 +1,26 @@
 package pl.lotto.numberreceiver;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 class NumberReceiverRepositoryStub implements NumberReceiverRepository{
 
+    private final UUID couponNumber;
+    private final List<Integer> numbersFormUser;
+    private final LocalDateTime drawDate;
+
+    NumberReceiverRepositoryStub() {
+        couponNumber = new UUID(111L,222L);
+        numbersFormUser = Arrays.asList(1, 2, 3, 4, 5, 6);
+        drawDate = LocalDateTime.of(
+                2022,10,1,20,0,0,0);
+    }
+
     @Override
     public NumberUserCoupon saveCoupon(NumberUserCoupon numberUserCoupon) {
-        List<Integer> numbersFromUser = Arrays.asList(1, 2, 3, 4, 5, 6);
-        UUID couponNumber = new UUID(111L,222L);
-        LocalDateTime drawDate = LocalDateTime.of(
-                2022,10,1,20,0,0,0);
-        return new NumberUserCoupon(couponNumber,numbersFromUser,drawDate);
+        return new NumberUserCoupon(couponNumber,numbersFormUser,drawDate);
     }
 
     @Override
@@ -23,7 +29,7 @@ class NumberReceiverRepositoryStub implements NumberReceiverRepository{
     }
 
     @Override
-    public List<NumberUserCoupon> getCouponsFromDate(NumberDrawDate numberDrawDate) {
-        return new ArrayList<>();
+    public List<NumberUserCoupon> getCouponsFromDate(LocalDateTime drawDate) {
+        return List.of(new NumberUserCoupon(couponNumber, numbersFormUser, drawDate));
     }
 }

@@ -6,17 +6,25 @@ import java.util.UUID;
 
 class NumberUserCoupon {
 
-    private UUID uuid;
-    private List<Integer> couponNumbers;
-    private LocalDateTime drawDate;
+    private final UUID uuid;
+    private final List<Integer> couponNumbers;
+    private final LocalDateTime drawDate;
 
-    public NumberUserCoupon(UUID uuid, List<Integer> couponNumbers, LocalDateTime drawDate) {
+    NumberUserCoupon(UUID uuid, List<Integer> couponNumbers, LocalDateTime drawDate) {
         this.uuid = uuid;
         this.couponNumbers = couponNumbers;
         this.drawDate = drawDate;
     }
 
-    public UUID getUuid() {
+    UUID getUuid() {
         return uuid;
+    }
+
+    List<Integer> getCouponNumbers() {
+        return couponNumbers;
+    }
+
+    LocalDateTime getDrawDate() {
+        return drawDate;
     }
 }

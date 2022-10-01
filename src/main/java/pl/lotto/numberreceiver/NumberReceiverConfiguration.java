@@ -2,13 +2,13 @@ package pl.lotto.numberreceiver;
 
 class NumberReceiverConfiguration {
 
-    NumberReceiverRepository numberReceiverRepository;
+    private NumberReceiverRepository numberReceiverRepository;
 
-    public NumberReceiverConfiguration(NumberReceiverRepository numberReceiverRepository) {
+    NumberReceiverConfiguration(NumberReceiverRepository numberReceiverRepository) {
         this.numberReceiverRepository = numberReceiverRepository;
     }
 
-    public NumberReceiverConfiguration() {
+    NumberReceiverConfiguration() {
     }
 
     NumberReceiverFacade buildModuleForClients() {
