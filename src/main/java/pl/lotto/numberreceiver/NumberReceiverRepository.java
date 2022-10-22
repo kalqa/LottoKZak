@@ -2,10 +2,10 @@ package pl.lotto.numberreceiver;
 import java.time.LocalDateTime;
 import java.util.*;
 
-interface NumberReceiverRepository {
+public interface NumberReceiverRepository {
 
     NumberUserCoupon saveCoupon(NumberUserCoupon numberUserCoupon);
 
-    List<NumberUserCoupon> getCouponsFromDate(LocalDateTime drawDate);
+    List<NumberUserCoupon> findCouponsFromDate(LocalDateTime drawDate);
 
 }

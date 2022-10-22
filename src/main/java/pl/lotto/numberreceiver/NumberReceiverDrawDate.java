@@ -4,11 +4,11 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-class NumberReceiverDrawDate {
+public class NumberReceiverDrawDate {
 
     private static final LocalTime TIME_OF_DRAW = LocalTime.of(20, 0, 0, 0);
 
-    LocalDateTime getDateOfDraw(LocalDateTime couponDate) {
+    public LocalDateTime getDateOfDraw(LocalDateTime couponDate) {
         int dayNumber = DayOfWeek.SATURDAY.getValue()-couponDate.getDayOfWeek().getValue();
 
         if (couponDate.getDayOfWeek().getValue() > DayOfWeek.SUNDAY.getValue() &&

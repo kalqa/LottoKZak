@@ -24,7 +24,7 @@ class NumberReceiverRepositoryStub  implements NumberReceiverRepository{
     }
 
     @Override
-    public List<NumberUserCoupon> getCouponsFromDate(LocalDateTime drawDate) {
+    public List<NumberUserCoupon> findCouponsFromDate(LocalDateTime drawDate) {
         if(dataBaseCoupons.containsKey(drawDate)){
             return dataBaseCoupons.get(drawDate);
         }

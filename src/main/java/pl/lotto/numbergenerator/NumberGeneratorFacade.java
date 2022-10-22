@@ -1,15 +1,16 @@
 package pl.lotto.numbergenerator;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 public class NumberGeneratorFacade {
-    private final WonNumberGenerator wonNumberGenerator;
 
-    public NumberGeneratorFacade(WonNumberGenerator wonNumberGenerator) {
-        this.wonNumberGenerator = wonNumberGenerator;
+    private final NumberGeneratorRepository numberGeneratorRepository;
+
+    public NumberGeneratorFacade(NumberGeneratorRepository numberGeneratorRepository) {
+        this.numberGeneratorRepository = numberGeneratorRepository;
     }
 
-    public List<Integer> retrieveWonNumbers() {
-        return wonNumberGenerator.generateWonNumbers();
+    public NumberGeneratorWonNumber retrieveWonNumbers(LocalDateTime drawDate) {
+        return numberGeneratorRepository.findWonNumberByDate(drawDate);
     }
 }

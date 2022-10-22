@@ -10,7 +10,8 @@ public class NumberReceiverFacade {
     private final NumberReceiverDrawDate numberReceiverDrawDate;
     private final NumberReceiverRepository numberReceiverRepository;
 
-    public NumberReceiverFacade(NumberValidator numberValidator, NumberReceiverDrawDate numberReceiverDrawDate, NumberReceiverRepository numberReceiverRepository) {
+    public NumberReceiverFacade(NumberValidator numberValidator, NumberReceiverDrawDate numberReceiverDrawDate,
+                                NumberReceiverRepository numberReceiverRepository) {
         this.numberValidator = numberValidator;
         this.numberReceiverDrawDate = numberReceiverDrawDate;
         this.numberReceiverRepository = numberReceiverRepository;
@@ -27,6 +28,6 @@ public class NumberReceiverFacade {
     }
 
     public List<NumberUserCoupon> retrieveUserNumbers(LocalDateTime drawDate) {
-        return numberReceiverRepository.getCouponsFromDate(drawDate);
+        return numberReceiverRepository.findCouponsFromDate(drawDate);
     }
 }
