@@ -1,10 +1,9 @@
 package pl.lotto.numberreceiver;
 
-
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class NumberReceiverRepositoryStub  implements NumberReceiverRepository{
+class NumberReceiverRepositoryStub  implements NumberReceiverRepository{
 
     private final Map<LocalDateTime,List<NumberUserCoupon>> dataBaseCoupons;
 
@@ -25,13 +24,10 @@ public class NumberReceiverRepositoryStub  implements NumberReceiverRepository{
     }
 
     @Override
-    public boolean checkCoupon(UUID uuid) {
-
-        return true;
-    }
-
-    @Override
     public List<NumberUserCoupon> getCouponsFromDate(LocalDateTime drawDate) {
-        return null;
+        if(dataBaseCoupons.containsKey(drawDate)){
+            return dataBaseCoupons.get(drawDate);
+        }
+        return new ArrayList<>();
     }
 }

@@ -2,18 +2,16 @@ package pl.lotto.numberreceiver;
 
 class NumberReceiverConfiguration {
 
-    private NumberReceiverRepository numberReceiverRepository;
+    private final NumberReceiverRepository numberReceiverRepository;
 
     NumberReceiverConfiguration(NumberReceiverRepository numberReceiverRepository) {
         this.numberReceiverRepository = numberReceiverRepository;
     }
 
-    NumberReceiverConfiguration() {
-    }
-
     NumberReceiverFacade buildModuleForClients() {
         NumberValidator numberValidator = new NumberValidator();
-        return new NumberReceiverFacade(numberValidator, numberReceiverRepository);
+        NumberReceiverDrawDate numberReceiverDrawDate = new NumberReceiverDrawDate();
+        return new NumberReceiverFacade(numberValidator, numberReceiverDrawDate, numberReceiverRepository);
     }
 
     NumberReceiverFacade buildModuleForTests() {

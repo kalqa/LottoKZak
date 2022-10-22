@@ -6,24 +6,24 @@ import java.util.UUID;
 
 public class NumberReceiverFacade {
 
-    private static final String OK_MESSAGE = "OK";
     private final NumberValidator numberValidator;
+    private final NumberReceiverDrawDate numberReceiverDrawDate;
     private final NumberReceiverRepository numberReceiverRepository;
 
-    public NumberReceiverFacade(NumberValidator numberValidator, NumberReceiverRepository numberReceiverRepository) {
+    public NumberReceiverFacade(NumberValidator numberValidator, NumberReceiverDrawDate numberReceiverDrawDate, NumberReceiverRepository numberReceiverRepository) {
         this.numberValidator = numberValidator;
+        this.numberReceiverDrawDate = numberReceiverDrawDate;
         this.numberReceiverRepository = numberReceiverRepository;
     }
 
     public NumberReceiverResultDto inputNumbers(List<Integer> numbersFromUser) {
         UUID couponNumber = UUID.randomUUID();
-        String message = numberValidator.inputNumberValidate(numbersFromUser);
-        if(message.equals(OK_MESSAGE)) {
-            LocalDateTime couponDrawDate = numberValidator.getDateOfDraw(LocalDateTime.now());
+        NumberReceiverMessage message = numberValidator.inputNumberValidate(numbersFromUser);
+        if(message == NumberReceiverMessage.VALIDATE_OK) {
+            LocalDateTime couponDrawDate = numberReceiverDrawDate.getDateOfDraw(LocalDateTime.now());
             numberReceiverRepository.saveCoupon(new NumberUserCoupon(couponNumber, numbersFromUser, couponDrawDate));
-            message = numberValidator.validateSaveCoupon(numberReceiverRepository,couponNumber);
         }
-        return new NumberReceiverResultDto(couponNumber,message);
+        return new NumberReceiverResultDto(couponNumber,message.getMessage());
     }
 
     public List<NumberUserCoupon> retrieveUserNumbers(LocalDateTime drawDate) {
