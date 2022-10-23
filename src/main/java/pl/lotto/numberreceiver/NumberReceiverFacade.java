@@ -19,12 +19,12 @@ public class NumberReceiverFacade {
 
     public NumberReceiverResultDto inputNumbers(List<Integer> numbersFromUser) {
         UUID couponNumber = UUID.randomUUID();
+        LocalDateTime couponDrawDate = numberReceiverDrawDate.getDateOfDraw(LocalDateTime.now());
         NumberReceiverMessage message = numberValidator.inputNumberValidate(numbersFromUser);
         if(message == NumberReceiverMessage.VALIDATE_OK) {
-            LocalDateTime couponDrawDate = numberReceiverDrawDate.getDateOfDraw(LocalDateTime.now());
             numberReceiverRepository.saveCoupon(new NumberUserCoupon(couponNumber, numbersFromUser, couponDrawDate));
         }
-        return new NumberReceiverResultDto(couponNumber,message.getMessage());
+        return new NumberReceiverResultDto(couponNumber,couponDrawDate,numbersFromUser,message.getMessage());
     }
 
     public List<NumberUserCoupon> retrieveUserNumbers(LocalDateTime drawDate) {

@@ -3,7 +3,7 @@ package pl.lotto.numbergenerator;
 import java.time.LocalDateTime;
 import java.util.List;
 
-class NumberGeneratorWonNumber {
+public class NumberGeneratorWonNumber {
 
     private final LocalDateTime drawDate;
     private final List<Integer> wonNumberList;
@@ -17,7 +17,7 @@ class NumberGeneratorWonNumber {
         return drawDate;
     }
 
-    List<Integer> getWonNumberList() {
+    public List<Integer> getWonNumberList() {
         return wonNumberList;
     }
 }

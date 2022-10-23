@@ -23,7 +23,8 @@ public class NumberReceiverFacadeTest {
         //when
         NumberReceiverResultDto result = numberReceiverFacade.inputNumbers(numbersFromUser);
         //then
-        Assertions.assertEquals("OK",result.message());
+        Assertions.assertEquals("OK",result.getMessage());
+        Assertions.assertEquals(numbersFromUser.size(),result.getUserNumbers().size());
     }
 
 
@@ -36,7 +37,7 @@ public class NumberReceiverFacadeTest {
         //when
         NumberReceiverResultDto result = numberReceiverFacade.inputNumbers(numbersFromUser);
         //then
-        Assertions.assertEquals(NumberReceiverMessage.ERROR_QUANTITY_NUMBER.getMessage(),result.message());
+        Assertions.assertEquals(NumberReceiverMessage.ERROR_QUANTITY_NUMBER.getMessage(),result.getMessage());
     }
 
     @Test
@@ -48,7 +49,7 @@ public class NumberReceiverFacadeTest {
         //when
         NumberReceiverResultDto result = numberReceiverFacade.inputNumbers(numbersFromUser);
         //then
-        Assertions.assertEquals(NumberReceiverMessage.ERROR_QUANTITY_NUMBER.getMessage(),result.message());
+        Assertions.assertEquals(NumberReceiverMessage.ERROR_QUANTITY_NUMBER.getMessage(),result.getMessage());
     }
 
     @Test
@@ -60,7 +61,7 @@ public class NumberReceiverFacadeTest {
         //when
         NumberReceiverResultDto result = numberReceiverFacade.inputNumbers(numbersFromUser);
         //then
-        Assertions.assertEquals(NumberReceiverMessage.ERROR_LIMIT_VALUE_NUMBER.getMessage(),result.message());
+        Assertions.assertEquals(NumberReceiverMessage.ERROR_LIMIT_VALUE_NUMBER.getMessage(),result.getMessage());
     }
 
     @Test
@@ -72,7 +73,7 @@ public class NumberReceiverFacadeTest {
         //when
         NumberReceiverResultDto result = numberReceiverFacade.inputNumbers(numbersFromUser);
         //then
-        Assertions.assertEquals(NumberReceiverMessage.ERROR_LIMIT_VALUE_NUMBER.getMessage(),result.message());
+        Assertions.assertEquals(NumberReceiverMessage.ERROR_LIMIT_VALUE_NUMBER.getMessage(),result.getMessage());
     }
 
     @Test
@@ -85,14 +86,13 @@ public class NumberReceiverFacadeTest {
         UUID couponNumberExpected = new UUID(111L,222L);
         LocalDateTime drawDateExpected = LocalDateTime.of(
                 2022,10,1,20,0,0,0);
-        numberReceiverRepositoryStub.saveCoupon(
-                new NumberUserCoupon(couponNumberExpected,numbersFromUserExpected,drawDateExpected));
+        NumberUserCoupon numberUserCoupon = new NumberUserCoupon(
+                couponNumberExpected,numbersFromUserExpected,drawDateExpected);
+        numberReceiverRepositoryStub.saveCoupon(numberUserCoupon);
         //when
         List<NumberUserCoupon> result = numberReceiverFacade.retrieveUserNumbers(drawDateExpected);
         //then
-        Assertions.assertEquals(1,result.size());
-        Assertions.assertEquals(couponNumberExpected,result.get(0).getUuid());
-        Assertions.assertEquals(numbersFromUserExpected.size(),result.get(0).getCouponNumbers().size());
-        Assertions.assertEquals(drawDateExpected,result.get(0).getDrawDate());
+        Assertions.assertFalse(result.isEmpty());
+        Assertions.assertTrue(result.contains(numberUserCoupon));
     }
 }

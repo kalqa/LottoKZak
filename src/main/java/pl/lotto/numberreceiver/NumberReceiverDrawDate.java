@@ -10,7 +10,6 @@ public class NumberReceiverDrawDate {
 
     public LocalDateTime getDateOfDraw(LocalDateTime couponDate) {
         int dayNumber = DayOfWeek.SATURDAY.getValue()-couponDate.getDayOfWeek().getValue();
-
         if (couponDate.getDayOfWeek().getValue() > DayOfWeek.SUNDAY.getValue() &&
                 couponDate.toLocalTime().isAfter(TIME_OF_DRAW)) {
             dayNumber = DayOfWeek.SATURDAY.getValue()

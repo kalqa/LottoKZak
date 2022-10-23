@@ -4,27 +4,28 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-class NumberUserCoupon {
+public class NumberUserCoupon {
 
     private final UUID uuid;
     private final List<Integer> couponNumbers;
     private final LocalDateTime drawDate;
 
-    NumberUserCoupon(UUID uuid, List<Integer> couponNumbers, LocalDateTime drawDate) {
+    public NumberUserCoupon(UUID uuid, List<Integer> couponNumbers, LocalDateTime drawDate) {
         this.uuid = uuid;
         this.couponNumbers = couponNumbers;
         this.drawDate = drawDate;
     }
 
-    UUID getUuid() {
+    public UUID getUuid() {
         return uuid;
     }
 
-    List<Integer> getCouponNumbers() {
+    public List<Integer> getCouponNumbers() {
         return couponNumbers;
     }
 
-    LocalDateTime getDrawDate() {
+    public LocalDateTime getDrawDate() {
         return drawDate;
     }
+
 }
