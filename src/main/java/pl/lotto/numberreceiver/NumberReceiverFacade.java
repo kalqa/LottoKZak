@@ -22,12 +22,12 @@ public class NumberReceiverFacade {
         LocalDateTime couponDrawDate = numberReceiverDrawDate.getDateOfDraw(LocalDateTime.now());
         NumberReceiverMessage message = numberValidator.inputNumberValidate(numbersFromUser);
         if(message == NumberReceiverMessage.VALIDATE_OK) {
-            numberReceiverRepository.saveCoupon(new NumberUserCoupon(couponNumber, numbersFromUser, couponDrawDate));
+            numberReceiverRepository.save(new NumberUserCoupon(couponNumber, numbersFromUser, couponDrawDate));
         }
         return new NumberReceiverResultDto(couponNumber,couponDrawDate,numbersFromUser,message.getMessage());
     }
 
     public List<NumberUserCoupon> retrieveUserNumbers(LocalDateTime drawDate) {
-        return numberReceiverRepository.findCouponsFromDate(drawDate);
+        return numberReceiverRepository.findAllByDrawDate(drawDate);
     }
 }

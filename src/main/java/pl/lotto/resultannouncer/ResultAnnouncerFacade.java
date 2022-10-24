@@ -11,11 +11,11 @@ public class ResultAnnouncerFacade {
     public ResultAnnouncerDto checkWinner(NumberReceiverResultDto numberReceiverResultDto) {
         numberReceiverResultDto.setMessage(ResultAnnouncerMessage.LOST_MESSAGE.getMessage());
         ResultCheckerDto resultCheckerDto = resultCheckerFacade
-                .checkWinner(numberReceiverResultDto.getDrawDate(),numberReceiverResultDto.getUuid());
-        if(resultCheckerDto.isWon()) {
+                .checkWinner(numberReceiverResultDto.getDrawDate(), numberReceiverResultDto.getUuid());
+        if (resultCheckerDto.isWon()) {
             numberReceiverResultDto.setMessage(ResultAnnouncerMessage.WIN_MESSAGE.getMessage());
         }
-        return new ResultAnnouncerDto(numberReceiverResultDto,resultCheckerDto.getWonNumbersList());
+        return new ResultAnnouncerDto(numberReceiverResultDto, resultCheckerDto.getWonNumbersList());
     }
 
 }

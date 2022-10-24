@@ -10,6 +10,8 @@ import java.util.UUID;
 
 class ResultChecker {
 
+    public static final int HOW_MANY_NUMBERS_WON = 6;
+
     ResultCheckerDto checkCoupon(List<NumberUserCoupon> numberUserCouponList,
                                  NumberGeneratorWonNumber numberGeneratorWonNumber, UUID uuidCoupon,
                                  LocalDateTime drawDate) {
@@ -20,7 +22,7 @@ class ResultChecker {
         }
         List<Integer> resultList = getListToCheck(wonNumbers,
                 numberUserCoupon.getCouponNumbers());
-        if(resultList.size() == wonNumbers.size()) {
+        if(resultList.size() == HOW_MANY_NUMBERS_WON) {
             return new ResultCheckerDto(wonNumbers,false);
         }
         return new ResultCheckerDto(wonNumbers,true);
@@ -35,6 +37,7 @@ class ResultChecker {
     }
 
     private List<Integer> getListToCheck(List<Integer> wonNumbersList, List<Integer> userNumbersList) {
+        boolean allMatch = wonNumbersList.containsAll(userNumbersList);
         wonNumbersList.addAll(userNumbersList);
         return wonNumbersList.stream().distinct().toList();
     }
