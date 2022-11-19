@@ -1,23 +1,24 @@
 package pl.lotto.numbergenerator;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
+import java.util.Set;
 
 public class NumberGeneratorWonNumber {
 
     private final LocalDateTime drawDate;
-    private final List<Integer> wonNumberList;
+    private final Set<Integer> wonNumbers;
 
-    NumberGeneratorWonNumber(LocalDateTime drawDate, List<Integer> wonNumberList) {
+    NumberGeneratorWonNumber(LocalDateTime drawDate, Set<Integer> wonNumbers) {
         this.drawDate = drawDate;
-        this.wonNumberList = wonNumberList;
+        this.wonNumbers = wonNumbers;
     }
 
     LocalDateTime getDrawDate() {
         return drawDate;
     }
 
-    public List<Integer> getWonNumberList() {
-        return wonNumberList;
+    public Set<Integer> getWonNumbers() {
+        return wonNumbers;
     }
 }

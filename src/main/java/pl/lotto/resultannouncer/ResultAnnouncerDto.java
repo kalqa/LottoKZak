@@ -1,16 +1,16 @@
 package pl.lotto.resultannouncer;
 
 import pl.lotto.numberreceiver.NumberReceiverResultDto;
-import java.util.List;
+import java.util.Set;
 
 public class ResultAnnouncerDto {
 
     private NumberReceiverResultDto numberReceiverResultDto;
-    private List<Integer> wonNumbersList;
+    private Set<Integer> wonNumbers;
 
-    public ResultAnnouncerDto(NumberReceiverResultDto numberReceiverResultDto, List<Integer> wonNumbersList) {
+    public ResultAnnouncerDto(NumberReceiverResultDto numberReceiverResultDto, Set<Integer> wonNumbers) {
         this.numberReceiverResultDto = numberReceiverResultDto;
-        this.wonNumbersList = wonNumbersList;
+        this.wonNumbers = wonNumbers;
     }
 
 }

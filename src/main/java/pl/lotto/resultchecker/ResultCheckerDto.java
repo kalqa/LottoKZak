@@ -1,19 +1,18 @@
 package pl.lotto.resultchecker;
-import java.util.List;
-
+import java.util.Set;
 
 
 public class ResultCheckerDto {
-    private List<Integer> wonNumbersList;
-    private boolean isWon;
+    private final Set<Integer> wonNumbers;
+    private final boolean isWon;
 
-    public ResultCheckerDto(List<Integer> wonNumbersList, boolean isWon) {
-        this.wonNumbersList = wonNumbersList;
+    public ResultCheckerDto(Set<Integer> wonNumbers, boolean isWon) {
+        this.wonNumbers = wonNumbers;
         this.isWon = isWon;
     }
 
-    public List<Integer> getWonNumbersList() {
-        return wonNumbersList;
+    public Set<Integer> getWonNumbers() {
+        return wonNumbers;
     }
 
     public boolean isWon() {

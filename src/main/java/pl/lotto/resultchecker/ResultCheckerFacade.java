@@ -22,9 +22,9 @@ public class ResultCheckerFacade {
     }
 
     public ResultCheckerDto checkWinner(LocalDateTime drawDate, UUID uuidCoupon){
-        List<NumberUserCoupon> numberUserCouponList =  numberReceiverFacade.retrieveUserNumbers(drawDate);
+        List<NumberUserCoupon> numberUserCoupons =  numberReceiverFacade.retrieveUserNumbers(drawDate);
         NumberGeneratorWonNumber numberGeneratorWonNumber = numberGeneratorFacade.retrieveWonNumbers(drawDate);
-        return resultChecker.checkCoupon(numberUserCouponList,numberGeneratorWonNumber,uuidCoupon,drawDate);
+        return resultChecker.checkCoupon(numberUserCoupons,numberGeneratorWonNumber,uuidCoupon,drawDate);
     }
 
 

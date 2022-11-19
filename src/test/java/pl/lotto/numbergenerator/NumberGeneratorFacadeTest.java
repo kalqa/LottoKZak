@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 public class NumberGeneratorFacadeTest {
 
     @Test
-    @DisplayName("should return list of Won number")
-    public void should_return_list_of_Won_number() {
+    @DisplayName("should return Won numbers")
+    public void should_return_Won_numbers() {
         //given
         NumberGeneratorRepository numberGeneratorRepository = new NumberGeneratorRepositoryStub();
         WonNumberGenerator wonNumberGenerator = new WonNumberGenerator(
@@ -23,12 +23,12 @@ public class NumberGeneratorFacadeTest {
                 numberGeneratorWonNumberExpected.getDrawDate());
         //then
         Assertions.assertEquals(numberGeneratorWonNumberExpected.getDrawDate(), numberGeneratorWonNumberResult.getDrawDate());
-        Assertions.assertEquals(numberGeneratorWonNumberExpected.getWonNumberList().size(), numberGeneratorWonNumberResult.getWonNumberList().size());
+        Assertions.assertEquals(numberGeneratorWonNumberExpected.getWonNumbers().size(), numberGeneratorWonNumberResult.getWonNumbers().size());
     }
 
     @Test
-    @DisplayName("should return empty list of Won number")
-    public void should_return_empty_list_of_Won_number() {
+    @DisplayName("should return empty set of Won number")
+    public void should_return_empty_set_of_Won_number() {
         //given
         NumberGeneratorRepository numberGeneratorRepository = new NumberGeneratorRepositoryStub();
         NumberGeneratorFacade numberGeneratorFacade = new NumberGeneratorConfiguration(
@@ -38,6 +38,6 @@ public class NumberGeneratorFacadeTest {
         NumberGeneratorWonNumber numberGeneratorWonNumberResult = numberGeneratorFacade.retrieveWonNumbers(drawDate);
         //then
         Assertions.assertEquals(drawDate, numberGeneratorWonNumberResult.getDrawDate());
-        Assertions.assertTrue(numberGeneratorWonNumberResult.getWonNumberList().isEmpty());
+        Assertions.assertTrue(numberGeneratorWonNumberResult.getWonNumbers().isEmpty());
     }
 }

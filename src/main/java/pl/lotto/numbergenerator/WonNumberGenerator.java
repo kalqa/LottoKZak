@@ -3,9 +3,7 @@ package pl.lotto.numbergenerator;
 import pl.lotto.numberreceiver.NumberReceiverDrawDate;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 class WonNumberGenerator {
 
@@ -22,20 +20,18 @@ class WonNumberGenerator {
     }
 
     NumberGeneratorWonNumber saveWonNumbers() {
-        List<Integer> wonNumbersList = generateWonNumbers();
+        Set<Integer> wonNumbers = generateWonNumbers();
         LocalDateTime drawDate = numberReceiverDrawDate.getDateOfDraw(LocalDateTime.now());
-        return numberGeneratorRepository.saveWonNumber(new NumberGeneratorWonNumber(drawDate,wonNumbersList));
+        return numberGeneratorRepository.saveWonNumber(new NumberGeneratorWonNumber(drawDate,wonNumbers));
     }
 
-    private List<Integer> generateWonNumbers() {
+    private Set<Integer> generateWonNumbers() {
         Random generator = new Random();
-        List<Integer> wonNumbers = new ArrayList<>();
-        Integer number;
+        Set<Integer> wonNumbers = new HashSet<>();
+        int number;
         do {
             number = generator.nextInt(MAX_NUMBER_VALUE) + MIN_NUMBER_VALUE;
-            if(!wonNumbers.contains(number)){
                 wonNumbers.add(number);
-            }
         } while (wonNumbers.size() < NUMBER_OF_RANDOM_NUMBERS);
         return wonNumbers;
     }

@@ -4,39 +4,30 @@ import pl.lotto.numbergenerator.NumberGeneratorWonNumber;
 import pl.lotto.numberreceiver.NumberUserCoupon;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 class ResultChecker {
 
-    ResultCheckerDto checkCoupon(List<NumberUserCoupon> numberUserCouponList,
+    private final ResultCheckerValidate resultCheckerValidate;
+
+    public ResultChecker() {
+        resultCheckerValidate = new ResultCheckerValidate();
+    }
+
+    ResultCheckerDto checkCoupon(List<NumberUserCoupon> numberUserCoupons,
                                  NumberGeneratorWonNumber numberGeneratorWonNumber, UUID uuidCoupon,
                                  LocalDateTime drawDate) {
-        List<Integer> wonNumbers = numberGeneratorWonNumber.getWonNumberList();
-        NumberUserCoupon numberUserCoupon = getNumberUserCoupon(numberUserCouponList, uuidCoupon, drawDate);
-        if (numberUserCoupon.getCouponNumbers().isEmpty() || wonNumbers.isEmpty()) {
-            return new ResultCheckerDto(wonNumbers, false);
-        }
-        List<Integer> resultList = getListToCheck(wonNumbers,
-                numberUserCoupon.getCouponNumbers());
-        if(resultList.size() == wonNumbers.size()) {
-            return new ResultCheckerDto(wonNumbers,false);
-        }
-        return new ResultCheckerDto(wonNumbers,true);
+        Set<Integer> wonNumbers = numberGeneratorWonNumber.getWonNumbers();
+        NumberUserCoupon numberUserCoupon = findUserCoupon(numberUserCoupons, uuidCoupon, drawDate);
+        return resultCheckerValidate.validateNumbers(wonNumbers,numberUserCoupon.getCouponNumbers());
     }
 
-    private NumberUserCoupon getNumberUserCoupon(List<NumberUserCoupon> numberUserCouponList, UUID uuidCoupon,
-                                                 LocalDateTime drawDate) {
-       return numberUserCouponList.stream()
+    private NumberUserCoupon findUserCoupon(List<NumberUserCoupon> numberUserCoupons, UUID uuidCoupon,
+                                            LocalDateTime drawDate) {
+       return numberUserCoupons.stream()
+                .filter(c->c.getDrawDate().equals(drawDate))
                 .filter(c -> c.getUuid().equals(uuidCoupon))
                 .findFirst()
-                .orElse(new NumberUserCoupon(uuidCoupon, new ArrayList<>(), drawDate));
+                .orElseThrow(UserCouponException::new);
     }
-
-    private List<Integer> getListToCheck(List<Integer> wonNumbersList, List<Integer> userNumbersList) {
-        wonNumbersList.addAll(userNumbersList);
-        return wonNumbersList.stream().distinct().toList();
-    }
-
 }

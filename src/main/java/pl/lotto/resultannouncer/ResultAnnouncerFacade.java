@@ -15,7 +15,7 @@ public class ResultAnnouncerFacade {
         if(resultCheckerDto.isWon()) {
             numberReceiverResultDto.setMessage(ResultAnnouncerMessage.WIN_MESSAGE.getMessage());
         }
-        return new ResultAnnouncerDto(numberReceiverResultDto,resultCheckerDto.getWonNumbersList());
+        return new ResultAnnouncerDto(numberReceiverResultDto,resultCheckerDto.getWonNumbers());
     }
 
 }

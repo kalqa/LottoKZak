@@ -2,6 +2,7 @@ package pl.lotto.numberreceiver;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class NumberReceiverFacade {
@@ -17,7 +18,7 @@ public class NumberReceiverFacade {
         this.numberReceiverRepository = numberReceiverRepository;
     }
 
-    public NumberReceiverResultDto inputNumbers(List<Integer> numbersFromUser) {
+    public NumberReceiverResultDto inputNumbers(Set<Integer> numbersFromUser) {
         UUID couponNumber = UUID.randomUUID();
         LocalDateTime couponDrawDate = numberReceiverDrawDate.getDateOfDraw(LocalDateTime.now());
         NumberReceiverMessage message = numberValidator.inputNumberValidate(numbersFromUser);
