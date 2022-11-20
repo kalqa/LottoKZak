@@ -9,7 +9,7 @@ public class NumberGeneratorWonNumber {
     private final LocalDateTime drawDate;
     private final Set<Integer> wonNumbers;
 
-    NumberGeneratorWonNumber(LocalDateTime drawDate, Set<Integer> wonNumbers) {
+    public NumberGeneratorWonNumber(LocalDateTime drawDate, Set<Integer> wonNumbers) {
         this.drawDate = drawDate;
         this.wonNumbers = wonNumbers;
     }

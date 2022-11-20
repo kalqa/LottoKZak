@@ -6,7 +6,11 @@ import pl.lotto.resultchecker.ResultCheckerFacade;
 
 public class ResultAnnouncerFacade {
 
-    ResultCheckerFacade resultCheckerFacade;
+    private ResultCheckerFacade resultCheckerFacade;
+
+    public ResultAnnouncerFacade(ResultCheckerFacade resultCheckerFacade) {
+        this.resultCheckerFacade = resultCheckerFacade;
+    }
 
     public ResultAnnouncerDto checkWinner(NumberReceiverResultDto numberReceiverResultDto) {
         numberReceiverResultDto.setMessage(ResultAnnouncerMessage.LOST_MESSAGE.getMessage());

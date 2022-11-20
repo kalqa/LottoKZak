@@ -15,10 +15,11 @@ public class ResultCheckerFacade {
     private final NumberGeneratorFacade numberGeneratorFacade;
     private final ResultChecker resultChecker;
 
-    public ResultCheckerFacade(NumberReceiverFacade numberReceiverFacade, NumberGeneratorFacade numberGeneratorFacade) {
+    public ResultCheckerFacade(NumberReceiverFacade numberReceiverFacade, NumberGeneratorFacade numberGeneratorFacade,
+                               ResultChecker resultChecker) {
         this.numberReceiverFacade = numberReceiverFacade;
         this.numberGeneratorFacade = numberGeneratorFacade;
-        resultChecker = new ResultChecker();
+        this.resultChecker = resultChecker;
     }
 
     public ResultCheckerDto checkWinner(LocalDateTime drawDate, UUID uuidCoupon){
