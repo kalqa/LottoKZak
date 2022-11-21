@@ -3,9 +3,13 @@ package pl.lotto.numberreceiver;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class NumberUserCoupon {
 
+    @Id
     private final UUID uuid;
     private final Set<Integer> couponNumbers;
     private final LocalDateTime drawDate;

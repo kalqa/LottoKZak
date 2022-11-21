@@ -2,7 +2,7 @@ package pl.lotto.resultchecker;
 
 import java.util.Set;
 
-public class ResultCheckerValidate {
+public class ResultCheckerValidator {
     ResultCheckerDto validateNumbers(Set<Integer> wonNumbers, Set<Integer>couponNumbers){
         Set<Integer> resultNumbers = compareNumbers(wonNumbers, couponNumbers);
         if(resultNumbers.size() == wonNumbers.size()) {

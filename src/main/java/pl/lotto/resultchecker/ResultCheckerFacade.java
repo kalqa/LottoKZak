@@ -1,13 +1,12 @@
 package pl.lotto.resultchecker;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 import pl.lotto.numbergenerator.NumberGeneratorFacade;
 import pl.lotto.numbergenerator.NumberGeneratorWonNumber;
 import pl.lotto.numberreceiver.NumberReceiverFacade;
 import pl.lotto.numberreceiver.NumberUserCoupon;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
 
 public class ResultCheckerFacade {
 
@@ -22,10 +21,10 @@ public class ResultCheckerFacade {
         this.resultChecker = resultChecker;
     }
 
-    public ResultCheckerDto checkWinner(LocalDateTime drawDate, UUID uuidCoupon){
-        List<NumberUserCoupon> numberUserCoupons =  numberReceiverFacade.retrieveUserNumbers(drawDate);
+    public ResultCheckerDto checkWinner(LocalDateTime drawDate, UUID uuidCoupon) {
+        List<NumberUserCoupon> numberUserCoupons = numberReceiverFacade.retrieveUserNumbers(drawDate);
         NumberGeneratorWonNumber numberGeneratorWonNumber = numberGeneratorFacade.retrieveWonNumbers(drawDate);
-        return resultChecker.checkCoupon(numberUserCoupons,numberGeneratorWonNumber,uuidCoupon,drawDate);
+        return resultChecker.checkCoupon(numberUserCoupons, numberGeneratorWonNumber, uuidCoupon, drawDate);
     }
 
 

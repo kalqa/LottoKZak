@@ -88,7 +88,7 @@ public class NumberReceiverFacadeTest {
                 2022,10,1,20,0,0,0);
         NumberUserCoupon numberUserCoupon = new NumberUserCoupon(
                 couponNumberExpected,numbersFromUserExpected,drawDateExpected);
-        numberReceiverRepositoryStub.saveCoupon(numberUserCoupon);
+        numberReceiverRepositoryStub.save(numberUserCoupon);
         //when
         List<NumberUserCoupon> result = numberReceiverFacade.retrieveUserNumbers(drawDateExpected);
         //then
